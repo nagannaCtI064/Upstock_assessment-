@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify, render_template
 from pymongo import MongoClient
 import os
+from dotenv import load_dotenv
 
 app = Flask(__name__)
 
@@ -8,6 +9,7 @@ app = Flask(__name__)
 client = MongoClient(os.getenv('MONGODB_URI'))
 db = client['train_booking']
 seats_collection = db['seats']
+load_dotenv()
 
 def init_db():
     # Initialize the database with seat data if it's empty
