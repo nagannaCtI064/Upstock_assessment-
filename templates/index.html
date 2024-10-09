@@ -3,38 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seat Booking</title>
+    <title>Train Booking</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Seat Booking System</h1>
+    <div class="container mt-5">
+        <h1>Train Seat Booking</h1>
+        
+        <h3>Available Seats</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Row</th>
+                    <th>Seat</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for seat in seats %}
+                <tr>
+                    <td>{{ seat.row_number }}</td>
+                    <td>{{ seat.seat_number }}</td>
+                    <td>{{ 'Booked' if seat.status else 'Available' }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 
-    <form action="/book" method="post">
-        <label for="num_seats">Number of seats to book:</label>
-        <input type="number" id="num_seats" name="num_seats" min="1" max="7" required>
-        <button type="submit">Book Seats</button>
-    </form>
+        <h3>Book Seats</h3>
+        <form action="/book" method="post">
+            <div class="form-group">
+                <label for="num_seats">Number of Seats to Book:</label>
+                <input type="number" id="num_seats" name="num_seats" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Book Seats</button>
+        </form>
 
-    {% if booked_seat_numbers %}
-        <h2>Booked Seats:</h2>
+        {% if booked_seat_numbers %}
+        <h3>Booked Seats</h3>
         <ul>
             {% for seat in booked_seat_numbers %}
             <li>{{ seat }}</li>
             {% endfor %}
         </ul>
-    {% endif %}
+        {% endif %}
+    </div>
 
-    <h2>Seats Layout</h2>
-    <ul>
-        {% for seat in seats %}
-        <li>
-            Row {{ seat['row_number'] }} Seat {{ seat['seat_number'] }} -
-            {% if seat['status'] %}
-            <strong>Booked</strong>
-            {% else %}
-            <strong>Available</strong>
-            {% endif %}
-        </li>
-        {% endfor %}
-    </ul>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
