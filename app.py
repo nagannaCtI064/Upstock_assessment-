@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 app = Flask(__name__)
 
 load_dotenv()  
-client = MongoClient(os.getenv('MONGODB_URI'))
+client = MongoClient("mongodb+srv://Naganna:Naganna890@cluster0.qhaksm0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 
 db = client['train_booking'] 
 seats_collection = db['seats']
