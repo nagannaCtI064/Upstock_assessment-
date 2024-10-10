@@ -5,11 +5,11 @@ from dotenv import load_dotenv
 
 app = Flask(__name__)
 
-# MongoDB connection
+load_dotenv()  
 client = MongoClient(os.getenv('MONGODB_URI'))
-db = client['train_booking']
+
+db = client['train_booking'] 
 seats_collection = db['seats']
-load_dotenv()
 
 def init_db():
     # Initialize the database with seat data if it's empty
